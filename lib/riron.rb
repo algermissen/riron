@@ -211,7 +211,11 @@ module Riron
   #
   # @return [String] The decoded, UTF-8 encoded string
   def base64_urlsafe_decode_padding_tolerant(str)
-    str += '=' * (4 - str.length.modulo(4))
+    n = 4 - str.length.modulo(4)
+    if(n == 4) 
+      n = 0
+    end
+    str += '=' * n
     Base64.urlsafe_decode64(str)
   end
 
